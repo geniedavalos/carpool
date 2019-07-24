@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>passenger</title>
+        {% load static %}
+      <link rel="stylesheet" href="{% static 'one_app/css/passenger.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+    <h1>Please enter zip code to search for a trip</h1>
+    <form method="post" action="/passenger/search">
+        <div class="form-group col-md-2">
+            <label for="inputZip">zipcode : </label>
+            <input type="text" class="form-control" id="inputZip">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+</html>

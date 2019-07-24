@@ -1,0 +1,12 @@
+.login{
+    display: inline-block;
+    vertical-align: top;
+}
+.registration{
+    display: inline-block;
+    margin: 0px 200px 0px 200px;
+}
+.body{
+    max-width: 100%;
+    height: auto;
+}
