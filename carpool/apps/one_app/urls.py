@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'^driver_add_departure$', views.driver_add_departure),
     url(r'^driver_add_departure/process$', views.driver_add_departure_process),
     url(r'^driver_add_arrival$', views.driver_add_arrival),
+    url(r'^driver_add_arrival/process$', views.driver_add_arrival_process),
+    url(r'^driver_summary$', views.driver_summary),
     url(r'^passenger$', views.passenger),
+    url(r'^passenger/process$', views.passenger_process),
 
 ]

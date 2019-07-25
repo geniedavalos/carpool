@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
 import re
-from pygeocoder import Geocoder
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 
 class UserManager(models.Manager):
@@ -21,7 +20,7 @@ class UserManager(models.Manager):
 
 
 
-class Users(models.Model):
+class User(models.Model):
     email = models.CharField(max_length=255)
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
@@ -35,17 +34,21 @@ class From(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=225)
     zipcode = models.CharField(max_length=45)
-    driver = models.ForeignKey(Users, related_name="driver")
-    time_departure = models.DateTimeField(auto_now=False)
+    state = models.CharField(max_length=225)
+    driver = models.ForeignKey(User, related_name="driver")
+    rider = models.ManyToManyField(User, related_name="rider")
+    date = models.DateField()
+    time = models.TimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class To(models.Model):
+    from_where = models.OneToOneField(From,on_delete=models.CASCADE,primary_key=True)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=225)
     zipcode = models.CharField(max_length=45)
-    passenger = models.ManyToManyField(Users, related_name="passenger")
+    state = models.CharField(max_length=225)
     price = models.FloatField()
-    time_arrival = models.DateTimeField(auto_now=False)
+    estimate_time_arrival = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
