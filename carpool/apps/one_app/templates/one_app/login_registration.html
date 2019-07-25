@@ -1,76 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login Registration</title>
-    {% load static %}
-      <link rel="stylesheet" href="{% static 'one_app/css/login_registration.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body class="body">
-    <form class="registration" method="post" action="/register">
-          {% csrf_token %}
-        <h1>Registration</h1>
-        <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" name="first_name"  placeholder="First name">
-            {%for message in messages %}
-                {%if "first_name" in message.tags %}
-                    <p> {{message}} </p>
-                {%endif%}
-            {%endfor%}
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" name="last_name"  placeholder="Last name">
-            {%for message in messages %}
-                {%if "last_name" in message.tags %}
-                    <p> {{message}} </p>
-                {%endif%}
-            {%endfor%}
-        </div>
-        <div class="form-group">
-            <label>Email address</label>
-            <input type="text" class="form-control" name="email" placeholder="Enter email">
-            {%for message in messages %}
-                {%if "email" in message.tags %}
-                    <p> {{message}} </p>
-                {%endif%}
-            {%endfor%}
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="text" class="form-control" name="password1" placeholder="Password">
-            {%for message in messages %}
-                {%if "password1" in message.tags %}
-                    <p> {{message}} </p>
-                {%endif%}
-            {%endfor%}
-        </div>
-        <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="text" class="form-control" name="password2" placeholder="Confirm Password">
-            {%for message in messages %}
-                {%if "password2" in message.tags %}
-                    <p> {{message}} </p>
-                {%endif%}
-            {%endfor%}
-        </div>
-        <button type="submit" class="btn btn-primary">Registration</button>
-    </form>
 
-    <form class="login" method="post" action="/login">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Let's Carpool</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+  .register, .login {
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    padding: 10px;
+  }
+
+  body {
+    padding: 5%;
+  }
+
+  .row {
+    display: block;
+  }
+
+  .title {
+    display: block;
+    text-align: center;
+  }
+
+  input {
+    width: 80%;
+  }
+</style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">
+      <h1>Let's Carpool</h1>
+    </div>
+    <div class="row d-flex justify-content-between">
+      <div class="register col-md-6">
+        <h3>Registration</h3>
+        <form action="/register" method="POST">
           {% csrf_token %}
-        <h1>login</h1>
-      <div class="form-group">
-        <label>Email address</label>
-        <input type="text" class="form-control" name="login_email" placeholder="Enter email">
+          <div class="form-group">
+            First Name:
+            <input type="text" class="form-control" name="first_name">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "first_name error" %}
+            <small>{{ message }}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            Last Name:
+            <input type="text" class="form-control" name="last_name">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "last_name error" %}
+            <small> {{ message }}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            Email:
+            <input type="email" class="form-control" name="email">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "email error" %}
+            <small> {{ message }}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            Password:
+            <input type="password" class="form-control" name="password1">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "password1 error" %}
+            <small> {{ message }}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            Confirm password:
+            <input type="password" class="form-control" name="password2">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "password2 error" %}
+            <small> {{ message }}</small> {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <input type="submit" name="register" class="btn btn-success" value="Register">
+        </form>
       </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="text" class="form-control" name="login_password" placeholder="Password">
+
+      <div class="login col-md-6">
+        <h3>Login</h3>
+        <form action="/login" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            Email:
+            <input type="email" class="form-control" name="login_email">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "login_email error" %}
+            <small class="text-danger"> {{ message }}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            Password:
+            <input type="password" class="form-control" name="login_password">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "login_password error" %}
+            <small> {{ message }}</small>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <input type="submit" name="login" class="btn btn-success" value="Login">
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Log in</button>
-    </form>
-    </body>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
 </html>
