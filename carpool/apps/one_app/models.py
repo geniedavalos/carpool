@@ -35,15 +35,15 @@ class From(models.Model):
     city = models.CharField(max_length=225)
     zipcode = models.CharField(max_length=45)
     state = models.CharField(max_length=225)
-    driver = models.ForeignKey(User, related_name="driver")
-    rider = models.ManyToManyField(User, related_name="rider")
+    drivers = models.ForeignKey(User, related_name="users_drivers")
+    riders = models.ManyToManyField(User, related_name="users_riders")
     date = models.DateField()
     time = models.TimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class To(models.Model):
-    from_where = models.OneToOneField(From,on_delete=models.CASCADE,primary_key=True)
+    from_where = models.OneToOneField(From,on_delete=models.CASCADE, related_name='to')
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=225)
     zipcode = models.CharField(max_length=45)

@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^driver_summary$', views.driver_summary),
     url(r'^passenger$', views.passenger),
     url(r'^passenger/process$', views.passenger_process),
+    url(r'^passenger/add_ride/(?P<ride_id>[0-9]+)$', views.passenger_add_ride),
 
 ]

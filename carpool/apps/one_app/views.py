@@ -78,6 +78,7 @@ def driver_add_departure_process(request):
     if result == True:
         new_departure = From.objects.create(street=address['street'], city=address['city'], state=address['state'], driver=driver, date=address['date'], time=address['time'])
         request.session['trip_id']=new_departure.id
+        print('print from entering the departure = ',new_departure.id )
         return redirect("/driver_add_arrival")
 
 
@@ -101,15 +102,18 @@ def driver_add_arrival_process(request):
         return redirect('/driver_add_arrival')
     if result == True:
         depart=From.objects.get(id=request.session['trip_id'])
-        
+        print('print from entering the arrival = ',depart.id )
+
         a=To.objects.create(from_where=depart,street=address['street'], city=address['city'],zipcode=address['zipcode'], state=address['state'],  price=address['price'],  estimate_time_arrival=address['duration'])
+        print(a)
         return redirect(f'/driver_summary')
 
 
 def driver_summary(request):
+    summary1= From.objects.get(id=request.session['trip_id'])
     context = {
-    	'summary1' : From.objects.get(id=request.session['trip_id']),
-        'summary2' : To.objects.get(from_where=request.session['trip_id'])
+        'summary1' : From.objects.get(id=request.session['trip_id']),
+        'summary2' : To.objects.get(from_where=summary1)
     }
     return render(request, "one_app/driver_summary.html", context)
 
@@ -133,18 +137,20 @@ def passenger_process(request):
     # if result == True:        
     #     return HttpResponse('hahahah')
     results = From.objects.filter(date=request.POST['date'])
-    print(results)
+    print(results[0].id)
     locations=[]
     for i in range (0,len(results)):
+        id = results[i].id
         location = results[i].to.street+' '+results[i].to.city
         response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key=AIzaSyBHat7GUB_7DzbenFgIYvgxlyjvbnG19-o')
         resp_json_payload = response.json()
         result1=(resp_json_payload['results'][0]['geometry']['location'])
         locations.append({
+                'id' : id,
+                'place': location,
                 'lat':result1['lat'],
                 'lng':result1['lng']
         })
-    print(locations)
     input = request.POST['street']+' '+ request.POST['city']
     response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={input}&key=AIzaSyBHat7GUB_7DzbenFgIYvgxlyjvbnG19-o')
     resp_json_payload = response.json()
@@ -152,11 +158,23 @@ def passenger_process(request):
     content={
         'lat':result['lat'],
         'lng':result['lng'],
-        'locations':locations
+        'locations':locations,
     }
-    print(content)
     return render(request, "one_app/passenger_temp.html", content)
     
+
+def passenger_add_ride(request, ride_id):
+    this_trip = From.objects.get(id=ride_id)
+    this_passenger = User.objects.get(id=request.session['user_id'])
+    this_trip.riders.add(this_passenger)
+    results=this_trip.riders.all()
+    content={
+        'street':this_trip.street,
+        'city': this_trip.city,
+    }
+    return render(request, "one_app/passenger_summary.html", content)
+
+
 
 def test_address(address):
     auth_id = "9484953c-80e6-c55d-c6fc-317df18233eb"

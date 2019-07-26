@@ -62,23 +62,23 @@
         <tbody>
           <tr>
             <th scope="row">Starting Point</th>
-            <td>{street}</td>
-            <td>{city}</td>
-            <td>{state}</td>
-            <td>{zipcode}</td>
-            <td>{time_leaving}</td>
+            <td>{{ summary1.street }}</td>
+            <td>{{ summary1.city }}</td>
+            <td>{{ summary1.state }}</td>
+            <td>{{ summary1.zipcode }}</td>
+            <td>{{ summary1.time }}</td>
           </tr>
           <tr>
             <th scope="row">Destination</th>
-            <td>{street}</td>
-            <td>{city}</td>
-            <td>{state}</td>
-            <td>{zipcode}</td>
-            <td>{estimated_time_arrival}</td>
+            <td>{{ summary2.street }}</td>
+            <td>{{ summary2.city }}</td>
+            <td>{{ summary2.state }}</td>
+            <td>{{ summary2.zipcode }}</td>
+            <td></td>
           </tr>
         </tbody>
       </table>
-      <p class="mydestination summary">Estimated Price for this trip: ${price}</p>
+      <p class="mydestination summary">Estimated Price for this trip: ${{ summary2.price }}</p>
     </section>
 
     <section class="rider_table">
@@ -94,15 +94,15 @@
           </tr>
         </thead>
         <tbody>
-          {% for %}
-          <tr>
-            <th scope="row">{rider first_name} + {rider last_name}</th>
-            <td>{street}</td>
-            <td>{city}</td>
-            <td>{state}</td>
-            <td>{zipcode}</td>
-          </tr>
-          {% end %}
+{#          {% for %}#}
+{#          <tr>#}
+{#            <th scope="row">{rider first_name} + {rider last_name}</th>#}
+{#            <td>{street}</td>#}
+{#            <td>{city}</td>#}
+{#            <td>{state}</td>#}
+{#            <td>{zipcode}</td>#}
+{#          </tr>#}
+{#          {% end %}#}
         </tbody>
       </table>
     </section>
