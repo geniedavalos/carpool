@@ -5,21 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Driver Dashboard</title>
+  <title>Rider Dashboard</title>
   {% load static %}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <style>
     .mydestination,
-    .riderlist {
+    .driverlist {
       margin: 2%;
     }
-
     .destination_table,
-    .rider_table {
+    .driver_table {
       margin: 5% 0;
     }
-
     .button {
       display: block;
       text-align: center;
@@ -56,33 +54,25 @@
             <th scope="col">City</th>
             <th scope="col">State</th>
             <th scope="col">Zip Code</th>
-            <th scope="col">Time / ETA</th>
+            <th scope="col">Time</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Starting Point</th>
-            <td>{street}</td>
-            <td>{city}</td>
-            <td>{state}</td>
-            <td>{zipcode}</td>
-            <td>{time_leaving}</td>
-          </tr>
           <tr>
             <th scope="row">Destination</th>
             <td>{street}</td>
             <td>{city}</td>
             <td>{state}</td>
             <td>{zipcode}</td>
-            <td>{estimated_time_arrival}</td>
+            <td>{time}</td>
           </tr>
         </tbody>
       </table>
       <p class="mydestination summary">Estimated Price for this trip: ${price}</p>
     </section>
 
-    <section class="rider_table">
-      <h4 class="riderlist">Available Rider(s)</h4>
+    <section class="driver_table">
+      <h4 class="driverlist">Available Driver</h4>
       <table class="table">
         <thead>
           <tr>
@@ -96,7 +86,7 @@
         <tbody>
           {% for %}
           <tr>
-            <th scope="row">{rider first_name} + {rider last_name}</th>
+            <th scope="row">{driver first_name} + {driver last_name}</th>
             <td>{street}</td>
             <td>{city}</td>
             <td>{state}</td>

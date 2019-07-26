@@ -1,40 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Introduction</title>
-        {% load static %}
-      <link rel="stylesheet" href="{% static 'one_app/css/introduction.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Carpool</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+  <style>
+  p {
+    margin-block-end: 50px;
+  }
+
+  section {
+    display: block;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+
+  .title {
+    text-align: left;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  #footer {
+    display: block;
+    text-align: center;
+    background-color: #28a745;
+    color: white;
+    padding: 4.5%;
+  }
+
+  #footer a {
+    color: white;
+    text-decoration: none;
+}
+  </style>
 </head>
+
 <body>
-    <main role="main">
-        <div class="jumbotron1" class="jumbotron" >
-            <div class="container">
-                <h1 class="display-3">Why Carpool?</h1>
-                <p>It's a fast, fun, affordable way to commute. While carpooling isn't new, this is a fresh way to share the road and the costs. Choose to drive or ride, and match with people based on route and time of day. Use this app to drive, and catch a ride.</p>
-                <p><a class="btn btn-primary btn-lg" href="/login_registration" role="button">Get Start »</a></p>
-            </div>
-        </div>
+  <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="#">Carpool</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#why">Why Carpool?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#start">Get Started</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-        <div class="container">
-        <div class="row">
-            <div  class="col-md-4">
-                <h2>Match with someone going the same way </h2>
-                <p>Been single for so long? Try carpool with some one may help you find your partner along the way to work!!</p>
-            </div>
-            <div class="col-md-4">
-                <h2>Split the cost of gas</h2>
-                <p>Gas price is crazy right? which carpool, you only need to pay half of price</p>
-            </div>
-            <div class="col-md-4">
-                <h2>Say hello to the express lane</h2>
-                <p>Think about this! How do you feel when you are driving at norml speed and see people are stucking in traffic! Feel good right?</p>
-            </div>
-        </div>
-
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-3">Use Carpool.</h1>
+      <p class="lead">Cheaper than Uber or Lyft. Happiness Guaranteed. New way to share the road and the costs.<br>
+      </p>
+    </div>
   </div>
 
-</main>
+  <div class="container" id="why">
+    <section class="section" id="features">
+      <h2 class="title">Why Carpool?</h2>
+      <div class="row">
+
+        <div class="feature-box col-lg-6">
+          <div class="feature-body">
+            <ion-icon name="leaf" size="large" class="leaf"></ion-icon>
+            <h3 class="feature-title">Nature will thank you.</h3>
+            <p class="feature-text"> You will help reduce pollution by sharing a car.</p>
+          </div>
+        </div>
+
+        <div class="feature-box col-lg-6 ">
+          <div class="feature-body">
+            <ion-icon name="airplane" size="large"></ion-icon>
+            <h3 class="feature-title"> Drive with style.</h3>
+            <p class="feature-text"> Imagine the feeling of using the carpool lane during the rush hour.</p>
+          </div>
+        </div>
+
+        <div class="feature-box col-lg-6">
+          <div>
+            <ion-icon name="contacts" size="large"></ion-icon>
+          </div>
+          <h3 class="feature-title"> Elite Clientele.</h3>
+          <p class="feature-text">We have all the cool peeps in the area, the nicest ones to ride with.</p>
+        </div>
+
+        <div class="feature-box col-lg-6">
+          <div>
+            <ion-icon name="cash" size="large"></ion-icon>
+            <h3 class="feature-title">Cut driving costs.</h3>
+            <p class="feature-text">Choose to drive or ride. Get matched with people based on route and time of day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="start">
+      <h2 class="title">Get Started.</h2>
+      <div class="row">
+        <div class="card col-lg-6">
+          <img src="{% static 'one_app/images/driver.jpg' %}" class="card-img-top" alt="driver">
+          <!-- Photo by Austin Neill on Unsplash -->
+          <div class="card-body">
+            <h5 class="card-title">Driver</h5>
+            <a href="/login_registration" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Sign Up to Drive</a>
+          </div>
+        </div>
+
+        <div class="card col-lg-6">
+          <img src="{% static 'one_app/images/rider.jpg' %}" class="card-img-top" alt="rider">
+          <!-- Photo by Holly Mandarich on Unsplash -->
+          <div class="card-body">
+            <h5 class="card-title">Rider</h5>
+            <a href="/login_registration" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Sign Up to Ride</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container-fluid">
+        <h3 class="title">Contact us.</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <ion-icon name="phone-portrait" size="large"></ion-icon>
+            <h4>Get help in the app</h4>
+            <p>Feel free to ask us anything via our app.</p>
+          </div>
+          <div class="col-lg-6">
+            <ion-icon name="logo-twitter" size="large"></ion-icon>
+            <h4>Follow us on Twitter</h4>
+            <p>Tweet us with any questions you have. #helpMeCarpool</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="section" id="footer">
+    <div class="container-fluid">
+      <p>
+        <a href="#">
+          <ion-icon name="logo-twitter" size="large"></ion-icon>
+        </a>
+        <a href="#">
+          <ion-icon name="logo-instagram" size="large"></ion-icon>
+        </a>
+        <a href="#">
+          <ion-icon name="logo-facebook" size="large"></ion-icon>
+        </a>
+      </p>
+      <p>© Copyright 2019 Carpool</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>
