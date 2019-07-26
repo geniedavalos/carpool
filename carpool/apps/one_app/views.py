@@ -38,8 +38,6 @@ def register(request):
             request.session['user_id'] = user.id
             return redirect(f"/driver_or_passenger")
 
-
-
 def login(request):
     user = User.objects.filter(email=request.POST['login_email'])
     if user:
@@ -49,6 +47,10 @@ def login(request):
     else:
         messages.error(request, 'email or password is wrong', extra_tags='login_error')
         return redirect('/login_registration')
+    
+def logout(request):
+    request.session.clear()
+    return redirect('/')
 
 def driver_or_passenger(request):
     user_name = User.objects.get(id=request.session['user_id'])
