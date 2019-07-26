@@ -19,44 +19,66 @@
       text-align: center;
     }
 
+    .button {
+      margin: 2%;
+    }
+
     .driver, .rider {
       margin: 5%;
       width: 30%;
       display: inline-block;
     }
+
   </style>
 </head>
 
 <body>
   <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-   <a class="navbar-brand" href="#">Carpool</a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-     <span class="navbar-toggler-icon"></span>
-   </button>
-   <div class="collapse navbar-collapse" id="navbarNav">
-     <ul class="navbar-nav ml-auto">
-       <li class="nav-item">
-         <a class="nav-link" href="/logout">Log Out</a>
-       </li>
-     </ul>
-   </div>
- </nav>
+    <a class="navbar-brand" href="#">Carpool</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <div class="container">
-    <h1 class="title">Feelin' Like</h1>
-    <div class="row">
-      <div class="driver col-lg-4">
-        <img src="{% static 'one_app/images/driver.jpg' %}" class="card-img-top" alt="...">
-        <h5 class="card-title">Driving Today</h5>
-        <a href="/driver_add_departure" class="btn btn-success" role="button" aria-pressed="true">Let me be your Driver »</a>
-      </div>
+    <section>
+      <div class="row">
+        <h1 class="title">Let's Carpool!</h1>
+        <h4>Where are you going today? Let's go place together! Do you feel like... </h4>
+        <div class="driver col-lg-4">
+          <img src="{% static 'one_app/images/driver.jpg' %}" class="card-img-top" alt="...">
+          <h3 class="card-title">Driving Today?</h3>
+          <p><strong>Make Money</strong> - Less gas money by carpooling with awesome people.</p>
+          <p><strong>Drive Your Way</strong> - All you need to do is drive with awesome people.</p>
+          <div class="button">
+            <a href="/driver_add_departure" class="btn btn-success" role="button" aria-pressed="true">Let me be your Driver »</a>
+          </div>
+          <div class="button">
+            <a href="/driver_summary" class="btn btn-primary" role="button" aria-pressed="true">Check my ride »</a>
+          </div>
+        </div>
 
-      <div class="rider col-lg-4">
-        <img src="{% static 'one_app/images/rider.jpg' %}" class="card-img-top" alt="...">
-        <h5 class="card-title">Riding Today</h5>
-        <a href="/passenger" class="btn btn-success" role="button" aria-pressed="true">Let me be your Rider »</a>
+        <div class="rider col-lg-4">
+          <img src="{% static 'one_app/images/rider.jpg' %}" class="card-img-top" alt="...">
+          <h3 class="card-title">Riding Today?</h3>
+          <p><strong>Have Fun</strong> - No need to worry about other complications to have fun.</p>
+          <p><strong>Save Time</strong> - Take advantage of using the carpool lane. </p>
+          <div class="button">
+            <a href="/passenger" class="btn btn-success" role="button" aria-pressed="true">Let me be your Rider »</a>
+          </div>
+          <div class="button">
+            <a href="/passenger_add_ride" class="btn btn-primary" role="button" aria-pressed="true">Check my ride »</a>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
