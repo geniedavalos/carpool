@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tell me how you feelin'</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-    html, body, #map-canvas {
+    #map-canvas {
       height: 400px;
       margin: 0px;
       padding: 0px
@@ -11,14 +18,21 @@
       height: 40px;
       cursor: pointer;
     }
-  </style>
 
+    .container {
+      display: block;
+      text-align: center;
+
+    }
+    ul li {
+      list-style-type: none;
+    }
+
+  </style>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBHat7GUB_7DzbenFgIYvgxlyjvbnG19-o&language=de"></script>
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBHat7GUB_7DzbenFgIYvgxlyjvbnG19-o&language=de"></script>
   <script>
-  /**
-    jQuery events
-  */
+    //jQuery events
   $(document).ready(function() {
     // initiate Google maps
     initialize();
@@ -36,17 +50,13 @@
         var index = $('#markers_info .marker').index(this);
         markers[index].setIcon(normalIcon());
       }
-
     );
   });
-  /**
-    Google Maps stuff
-  */
+  //Google Maps stuff
     var markerData = [   // the order of these markers must be the same as the <div class="marker"></div> elements
       {% for location in locations %}
       {lat: {{ location.lat }}, lng: {{ location.lng }}, title: '{{ location.place }}'},
       {% endfor %}
-
     ];
     var map;
     var markers = [];
@@ -55,7 +65,6 @@
       center: new google.maps.LatLng({{ lat }},{{ lng }}),  // Brussels, Belgium
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
     function initialize() {
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
       new google.maps.Marker({
@@ -64,7 +73,6 @@
             map: map,
             icon: normal()
           })
-
       for (var i=0; i<markerData.length; i++) {
         markers.push(
           new google.maps.Marker({
@@ -76,9 +84,7 @@
         );
       }
     }
-
-
-    // functions that return icons.  Make or find your own markers.
+    //Functions that return icons. Make or find your own markers.
     function normalIcon() {
       return {
         url: '    http://labs.google.com/ridefinder/images/mm_20_red.png'
@@ -97,13 +103,41 @@
     //google.maps.event.addDomListener(window, 'load', initialize);
   </script>
 </head>
+
 <body>
+  <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="#">Carpool</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div id="map-canvas"></div>
-  <div id="markers_info">
-      {% for location in locations %}
-         <a href="/passenger/add_ride/{{ location.id }}"> <div class="marker">{{ location.place }} {{ location.id }}</div></a>
-      {% endfor %}
+  <div class="container">
+    <div id="markers_info">
+      <h1>Possible drivers for your destination</h1>
+      <ul>
+        {% for location in locations %}
+        <li>
+          <h4><a href="/passenger/add_ride/{{ location.id }}" class="driver_list">
+              <div class="marker">{{ location.place }} {{ location.id }}</div>
+            </a></h4>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>
