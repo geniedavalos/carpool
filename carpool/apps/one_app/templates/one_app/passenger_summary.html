@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Rider Dashboard</title>
+  <title>Ride Confirmation</title>
   {% load static %}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -27,24 +27,24 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-      <a class="navbar-brand" href="#">Carpool</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Log Out</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="#">Carpool</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
-    <h2 class="title">Dashboard</h2>
+    <h2 class="title">Confirmation</h2>
     <section class="destination_table">
-      <h4 class="mydestination">My Destination ({date})</h4>
+      <h4 class="mydestination">My Destination - {{ date }}</h4>
 
       <table class="table">
         <thead>
@@ -61,22 +61,21 @@
           <tr>
             <th scope="row">Destination</th>
             <td>{{ street }}</td>
-            <td>{city}</td>
-            <td>{state}</td>
-            <td>{zipcode}</td>
-            <td>{time}</td>
+            <td>{{city}}</td>
+            <td>{{state}}</td>
+            <td>{{ zipcode }}</td>
+            <td>{{ time }}</td>
           </tr>
         </tbody>
       </table>
-      <p class="mydestination summary">Estimated Price for this trip: ${price}</p>
+      <p class="mydestination summary">Estimated Price for this trip: ${{ price }}</p>
     </section>
 
     <section class="driver_table">
-      <h4 class="driverlist">Available Driver</h4>
+      <h4 class="driverlist">Available Driver: {{ driver_name }}</h4>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col"></th>
             <th scope="col">Address</th>
             <th scope="col">City</th>
             <th scope="col">State</th>
@@ -84,21 +83,18 @@
           </tr>
         </thead>
         <tbody>
-{#          {% for %}#}
-{#          <tr>#}
-{#            <th scope="row">{driver first_name} + {driver last_name}</th>#}
-{#            <td>{street}</td>#}
-{#            <td>{city}</td>#}
-{#            <td>{state}</td>#}
-{#            <td>{zipcode}</td>#}
-{#          </tr>#}
-{#          {% end %}#}
+          <tr>
+            <th scope="row">{{ driver_street }}</th>
+            <td>{{ driver_city }}</td>
+            <td>{{ driver_state }}</td>
+            <td>{{ driver_zipcode }}</td>
+          </tr>
         </tbody>
       </table>
     </section>
 
     <div class="button">
-      <a href="/confirm" class="btn btn-success">Confirm</a>
+      <a href="/passenger/add_to_ride/{{ trip_id }}" class="btn btn-success">Confirm</a>
       <a href="/driver_or_passenger" class="btn btn-danger">Cancel</a>
     </div>
   </div>
